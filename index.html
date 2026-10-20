@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cook Aloud — pocketappstudio</title><meta name="description" content="A recipe book that reads each step out loud and waits for you. Linked cooking videos when you want to see it done."><link rel="stylesheet" href="style.css"></head><body>
+<header>pocketappstudio</header><main>
+<section id="hero" style="padding-top:20px"><span class="tag">Pre-order · Early access</span>
+<h1>Cook with your hands.<br>Not your screen.</h1><p class="lead">A recipe book that reads each step out loud and waits for you. Linked cooking videos when you want to see it done.</p>
+<a class="btn" href="#pricing">Reserve early access</a><a class="btn alt" href="#demo">Try the sample</a></section>
+<section id="how"><h2>How it works</h2><ol class="steps"><li><b>Pick a recipe.</b> Or add your own.</li><li><b>Tap Start.</b> It reads one step at a time, out loud.</li><li><b>Hands busy?</b> Big buttons, timers, and a video link per step.</li></ol></section>
+<section id="demo"><h2>Cook mode</h2><p class="lead">Tap Read aloud. Your phone will speak the step.</p>
+<div class="phone"><div class="screen" id="app"><div style="padding:26px 20px;display:flex;flex-direction:column;min-height:500px"><small style="color:var(--gold);font-weight:700;font-size:12px;letter-spacing:.1em">SKILLET CORNBREAD · STEP <span id="n"></span> OF 5</small>
+<p class="big" id="st" style="margin:14px 0 16px;min-height:150px"></p>
+<button class="play" onclick="say()"><b>🔊</b><span>Read aloud</span></button>
+<div id="tm" style="display:none;margin-top:12px;background:#f4efe6;border-radius:14px;padding:12px;font-size:14px;align-items:center;justify-content:space-between"><span>⏱ <b id="tt"></b></span><button class="pill" onclick="tick()">Start timer</button></div>
+<a href="#demo" class="muted" style="margin-top:12px" onclick="return false">▶ Watch this step <span class="sample">SAMPLE · NO VIDEO</span></a>
+<div class="nav" style="margin-top:auto"><button id="pv" onclick="go(-1)">Back</button><div class="dots" id="dt"></div><button id="nx" onclick="go(1)">Next</button></div></div></div></div><p class="mini" style="text-align:center">Sample only. Names and numbers are examples.</p></section>
+<section id="pricing"><h2>Pre-order</h2>
+<p class="fine">Not built yet. Launch date: not yet set. Pre-order buyers get early access. If it doesn't ship, you get a full refund through Gumroad.</p><div class="tier"><h3>Free</h3><div class="price">$0</div><ul><li>Cook mode on 3 recipes</li><li>Read-aloud steps</li></ul><a class="btn alt" href="#gumroad-TBD">Join the free list</a></div><div class="tier best"><h3>Full Book</h3><div class="price">$7.99 <span class="fine">one-time</span></div><ul><li>Unlimited recipes</li><li>Add your own recipes</li><li>Timers on any step</li><li>Video link per step</li></ul><a class="btn" href="#gumroad-TBD">Pre-order on Gumroad</a></div></section>
+<section id="faq"><h2>Questions</h2><details><summary>Do I have to talk to it?</summary><p>No. It reads out loud, and you tap big Next and Back buttons. Voice commands are a goal, not a promise yet.</p></details><details><summary>Are the videos hosted here?</summary><p>No. Each step can link to a video on another site.</p></details><details><summary>Is it a subscription?</summary><p>No. Full Book is one payment.</p></details>
+<details><summary>When does it launch?</summary><p>Not yet set. Pre-order buyers get early access first.</p></details>
+<details><summary>What if it never ships?</summary><p>You get a full refund through Gumroad.</p></details>
+<details><summary>How do I get help?</summary><p>Message us through Gumroad.</p></details></section>
+</main><footer>© 2026 pocketappstudio<br><br><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></footer>
+<script>const T=[["Heat the oven to 425°F. Put a 10-inch cast iron skillet inside to get hot.",0],["Whisk 1 cup cornmeal, 1 cup flour, 1 tablespoon baking powder, and 1 teaspoon salt.",0],["In another bowl, whisk 1 cup buttermilk, 2 eggs, and 4 tablespoons melted butter.",0],["Stir the wet into the dry until just mixed. A few lumps are fine.",0],["Pour into the hot skillet. Bake until golden, about 20 minutes.",1200]];
+let i=0,iv;const dots=document.getElementById("dt");T.forEach(()=>dots.appendChild(document.createElement("span")));
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function r(){n.textContent=i+1;st.textContent=T[i][0];pv.disabled=i==0;nx.textContent=i==T.length-1?"Done":"Next";[...dots.children].forEach((e,k)=>e.classList.toggle("on",k==i));tm.style.display=T[i][1]?"flex":"none";tt.textContent=fmt(T[i][1]);clearInterval(iv)}
+function go(d){i=Math.max(0,Math.min(T.length-1,i+d));r()}
+function say(){if(window.speechSynthesis){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(T[i][0]))}}
+function tick(){let s=T[i][1];clearInterval(iv);iv=setInterval(()=>{s--;tt.textContent=fmt(s);if(s<=0)clearInterval(iv)},1000)}r()</script></body></html>
